@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>₹149 Unlock Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <style>
+    body {
+      font-family: 'Noto Sans Tamil', sans-serif;
+      background: radial-gradient(circle at top right, #1f0033, #000000);
+      color: #fff;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #ff1ead, #a100ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: #e0e0e0;
+    }
+    .pay-btn {
+      font-size: 1.3rem;
+      padding: 18px 36px;
+      background: linear-gradient(to right, #ff007f, #8e2de2);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .pay-btn:hover {
+      transform: scale(1.08);
+    }
+    footer {
+      margin-top: 40px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>₹149 Unlock Love Psychology</h1>
+  <p>உன் காதலியின் மனதை புரிந்து கொள்ள  
+  ரகசியங்களை இப்போது திறக்கலாம் 💖</p>
+
+  <button class="pay-btn" id="rzp-button">₹149 Unlock Now</button>
+
+  <footer>&copy; 2025 All rights reserved.</footer>
+
+  <script>
+    var options = {
+      "key": "rzp_test_1234567890abcdef", // 👉 உன் Razorpay Key இங்கே வை
+      "amount": "14900", // ₹149 = 149 x 100
+      "currency": "INR",
+      "name": "Content Unlock",
+      "description": "Access Premium Page",
+      "handler": function (response) {
+        // ✅ பணம் செலுத்தியதும் தான் Unlock பக்கம்
+        window.location.href = "unlock.html";
+      },
+      "prefill": {
+        "name": "",
+        "email": ""
+      },
+      "theme": {
+        "color": "#ff007f"
+      }
+    };
+
+    // Razorpay Button Click
+    document.getElementById('rzp-button').onclick = function (e) {
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault(); // 👉 Page reload ஆகாம prevent பண்ணும்
+    }
+  </script>
+
+</body>
+</html>
