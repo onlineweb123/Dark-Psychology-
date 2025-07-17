@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>₹149 Unlock Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.6/dist/umd/supabase.min.js"></script>
   <style>
     body {
       font-family: 'Noto Sans Tamil', sans-serif;
@@ -70,12 +69,6 @@
     .btn:hover {
       transform: scale(1.05);
     }
-    #codeDisplay {
-      margin-top: 10px;
-      font-size: 1.5rem;
-      color: #00ffcc;
-      letter-spacing: 4px;
-    }
     #status {
       margin-top: 15px;
       color: #f88;
@@ -92,109 +85,109 @@
   <h1>₹149 Unlock Love Psychology</h1>
   <p>உன் காதலியின் மனதை புரிந்து கொள்ள ரகசியங்களை இப்போது திறக்கலாம் 💖</p>
 
-  <button class="pay-btn" onclick="window.location.href='https://t.me/+QDA5q8GTBGpkNzQ1'">₹149 Unlock Now</button>
+  <!-- UPI PAY BUTTON -->
+  <button class="pay-btn" onclick="window.location.href='upi://pay?pa=mm05270331@oksbi&pn=LovePsychology&am=149&cu=INR&tn=Unlock+Love+Psychology'">
+    ₹149 Unlock Now via UPI
+  </button>
 
-  <p>உங்களுக்கு வந்த Code ஐ இதில் போடவும்</p>
+  <p>பணம் செலுத்திய பிறகு Screen Short ஐ எடுத்து instagram ல Message பண்ணால் உங்களுக்கு ஒரு Code தரப்படும் 
+  <br> 
+  
+  <h1>
+  <a href="https://www.instagram.com/mind_reading01?utm_source=qr&igsh=MXNpMGZ1bHNiZ3NjZQ=="> instagram </a>
+  
+  </h1>
+  
+  <br>
+  
+  அந்த Code ஐ இங்கு போட்டால் Unlock ஆகும் 
+  </பர்>:</p>
+  <input type="text" id="codeInput" placeholder="Enter Unlock Code" />
 
-  <input type="text" id="codeInput" placeholder="Enter Code or Admin Key" />
+  <!-- Open Page Button -->
+  <button class="btn" onclick="checkCode()">🔓 Open Page</button>
 
-  <button class="btn" id="genBtn" style="display: none;">✅ Generate Code</button>
-  <input type="text" id="removeInput" placeholder="Enter Code to Remove" style="display: none;" />
-  <button class="btn" id="removeBtn" style="display: none;">❌ Remove Code</button>
-
-  <div id="codeDisplay"></div>
-
-  <button class="btn" id="openBtn">🔓 Open Page</button>
-
+  <!-- Status Message -->
   <div id="status"></div>
 
   <footer>&copy; 2025 All rights reserved.</footer>
 
   <script>
-    const SUPABASE_URL = "https://wxwnxthgdsquwgeenfxw.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4d254dGhnZHNxdXdnZWVuZnh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3MTI3NTIsImV4cCI6MjA2ODI4ODc1Mn0.x3TjkTMASpNS0M1AgfZic7cmZgW-FuwSDr3w1Jbls60";
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const allowedCodes = [
+    
+        <!-- A -->
+        "341627",
+        
+        <!-- B -->
+        "792830", 
+        
+        <!-- C -->
+        "108462",
+        
+        <!-- D -->
+        "573910", 
+        
+        <!-- E -->
+        "652134",
+        
+        <!-- F -->
+        "409285", 
+        
+        <!-- G -->
+        "871036", 
+        
+        <!-- H -->
+        "963421",
+        
+        <!-- I -->
+        "723048", 
+        
+        <!-- J -->
+        "510936",
+        
+        <!-- K -->
+        "184209", 
+        
+        <!-- L -->
+        "390572",
+        
+        <!-- M -->
+        "628471", 
+        
+        <!-- N -->
+        "746195",
+        
+        <!-- O -->
+        "287064",
+        
+        <!-- P -->
+        "915320", 
+        
+        <!-- Q -->
+        "360178",
+        
+        <!-- R -->
+        "894312",
+        
+        <!-- S -->
+        "235089",
+        
+        <!-- T -->
+        "671503"
+   
+   
+    ];
 
-    const input = document.getElementById("codeInput");
-    const genBtn = document.getElementById("genBtn");
-    const openBtn = document.getElementById("openBtn");
-    const codeDisplay = document.getElementById("codeDisplay");
-    const status = document.getElementById("status");
-    const removeInput = document.getElementById("removeInput");
-    const removeBtn = document.getElementById("removeBtn");
+    function checkCode() {
+      const code = document.getElementById("codeInput").value.trim();
+      const status = document.getElementById("status");
 
-    // Admin UI Reveal
-    input.addEventListener("input", () => {
-      const isAdmin = input.value === "Admin12345@";
-      genBtn.style.display = isAdmin ? "inline-block" : "none";
-      removeInput.style.display = isAdmin ? "inline-block" : "none";
-      removeBtn.style.display = isAdmin ? "inline-block" : "none";
-    });
-
-    // Save code to Supabase
-    async function saveNewCodeToDB(code) {
-      const expiry = Date.now() + 15 * 24 * 60 * 60 * 1000;
-      const { error } = await supabase.from("unlock_codes").insert([{ code, expiry }]);
-      if (error) {
-        status.textContent = "❌ Save Failed: " + error.message;
-      } else {
-        codeDisplay.textContent = "New Code: " + code;
-        status.textContent = "✅ Code Generated & Saved for 15 Days.";
-      }
-    }
-
-    // Validate code from Supabase
-    async function checkCodeValid(code) {
-      const now = Date.now();
-      const { data, error } = await supabase
-        .from("unlock_codes")
-        .select("*")
-        .eq("code", code)
-        .gte("expiry", now)
-        .limit(1);
-
-      if (data && data.length > 0) {
+      if (allowedCodes.includes(code)) {
         window.location.href = "unlock.html";
       } else {
-        status.textContent = "❌ Invalid or Expired Code.";
+        status.textContent = "❌ தவறான Code. தயவுசெய்து சரியான Code ஐ உள்ளிடவும்.";
       }
     }
-
-    // Delete code from Supabase
-    async function deleteCodeFromDB(code) {
-      const { error } = await supabase.from("unlock_codes").delete().eq("code", code);
-      if (error) {
-        status.textContent = "❌ Delete Failed: " + error.message;
-      } else {
-        status.textContent = "✅ Code " + code + " Remove ஆனாச்சு.";
-      }
-    }
-
-    // Generate Button Click
-    genBtn.onclick = () => {
-      const newCode = Math.floor(1000 + Math.random() * 9000).toString();
-      saveNewCodeToDB(newCode);
-    };
-
-    // Remove Code Click
-    removeBtn.onclick = () => {
-      const codeToRemove = removeInput.value.trim();
-      if (codeToRemove) {
-        deleteCodeFromDB(codeToRemove);
-      } else {
-        status.textContent = "⚠️ Remove செய்ய Code எழுதவும்.";
-      }
-    };
-
-    // Open Button Click
-    openBtn.onclick = () => {
-      const enteredCode = input.value.trim();
-      if (enteredCode) {
-        checkCodeValid(enteredCode);
-      } else {
-        status.textContent = "⚠️ Code எழுதவும்.";
-      }
-    };
   </script>
 
 </body>
