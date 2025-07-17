@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>₹149 Unlock Page</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.6/dist/umd/supabase.min.js"></script>
   <style>
     body {
       font-family: 'Noto Sans Tamil', sans-serif;
@@ -92,31 +92,29 @@
   <h1>₹149 Unlock Love Psychology</h1>
   <p>உன் காதலியின் மனதை புரிந்து கொள்ள ரகசியங்களை இப்போது திறக்கலாம் 💖</p>
 
-  <!-- 🔘 Telegram Unlock Button -->
   <button class="pay-btn" onclick="window.location.href='https://t.me/+QDA5q8GTBGpkNzQ1'">₹149 Unlock Now</button>
 
   <p>உங்களுக்கு வந்த Code ஐ இதில் போடவும்</p>
 
-  <!-- Code Input Box -->
   <input type="text" id="codeInput" placeholder="Enter Code or Admin Key" />
 
-  <!-- Admin Buttons (Hidden by Default) -->
   <button class="btn" id="genBtn" style="display: none;">✅ Generate Code</button>
   <input type="text" id="removeInput" placeholder="Enter Code to Remove" style="display: none;" />
   <button class="btn" id="removeBtn" style="display: none;">❌ Remove Code</button>
 
-  <!-- Display -->
   <div id="codeDisplay"></div>
 
-  <!-- Open Button Always Visible -->
   <button class="btn" id="openBtn">🔓 Open Page</button>
 
-  <!-- Status -->
   <div id="status"></div>
 
   <footer>&copy; 2025 All rights reserved.</footer>
 
   <script>
+    const SUPABASE_URL = "https://wxwnxthgdsquwgeenfxw.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4d254dGhnZHNxdXdnZWVuZnh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI3MTI3NTIsImV4cCI6MjA2ODI4ODc1Mn0.x3TjkTMASpNS0M1AgfZic7cmZgW-FuwSDr3w1Jbls60";
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
     const input = document.getElementById("codeInput");
     const genBtn = document.getElementById("genBtn");
     const openBtn = document.getElementById("openBtn");
@@ -125,33 +123,7 @@
     const removeInput = document.getElementById("removeInput");
     const removeBtn = document.getElementById("removeBtn");
 
-    // Get all codes
-    function getAllCodes() {
-      return JSON.parse(localStorage.getItem("allUnlockCodes") || "[]");
-    }
-
-    // Save a new code
-    function saveNewCode(code) {
-      const now = new Date();
-      const expiry = new Date(now.getTime() + 15 * 24 * 60 * 60 * 1000);
-      const allCodes = getAllCodes();
-      allCodes.push({ code: code, expiry: expiry.getTime() });
-      localStorage.setItem("allUnlockCodes", JSON.stringify(allCodes));
-    }
-
-    // Delete a code
-    function deleteCode(code) {
-      let codes = getAllCodes();
-      const filtered = codes.filter(c => c.code !== code);
-      if (codes.length === filtered.length) {
-        status.textContent = "❌ அந்த Code இல்லை.";
-      } else {
-        localStorage.setItem("allUnlockCodes", JSON.stringify(filtered));
-        status.textContent = "✅ Code " + code + " Remove ஆனாச்சு.";
-      }
-    }
-
-    // Admin Detect
+    // Admin UI Reveal
     input.addEventListener("input", () => {
       const isAdmin = input.value === "Admin12345@";
       genBtn.style.display = isAdmin ? "inline-block" : "none";
@@ -159,35 +131,68 @@
       removeBtn.style.display = isAdmin ? "inline-block" : "none";
     });
 
-    // Generate New Code
+    // Save code to Supabase
+    async function saveNewCodeToDB(code) {
+      const expiry = Date.now() + 15 * 24 * 60 * 60 * 1000;
+      const { error } = await supabase.from("unlock_codes").insert([{ code, expiry }]);
+      if (error) {
+        status.textContent = "❌ Save Failed: " + error.message;
+      } else {
+        codeDisplay.textContent = "New Code: " + code;
+        status.textContent = "✅ Code Generated & Saved for 15 Days.";
+      }
+    }
+
+    // Validate code from Supabase
+    async function checkCodeValid(code) {
+      const now = Date.now();
+      const { data, error } = await supabase
+        .from("unlock_codes")
+        .select("*")
+        .eq("code", code)
+        .gte("expiry", now)
+        .limit(1);
+
+      if (data && data.length > 0) {
+        window.location.href = "unlock.html";
+      } else {
+        status.textContent = "❌ Invalid or Expired Code.";
+      }
+    }
+
+    // Delete code from Supabase
+    async function deleteCodeFromDB(code) {
+      const { error } = await supabase.from("unlock_codes").delete().eq("code", code);
+      if (error) {
+        status.textContent = "❌ Delete Failed: " + error.message;
+      } else {
+        status.textContent = "✅ Code " + code + " Remove ஆனாச்சு.";
+      }
+    }
+
+    // Generate Button Click
     genBtn.onclick = () => {
       const newCode = Math.floor(1000 + Math.random() * 9000).toString();
-      saveNewCode(newCode);
-      codeDisplay.textContent = "New Code: " + newCode;
-      status.textContent = "✅ Code Generated & Saved for 15 Days.";
+      saveNewCodeToDB(newCode);
     };
 
-    // Remove Code Button
+    // Remove Code Click
     removeBtn.onclick = () => {
       const codeToRemove = removeInput.value.trim();
       if (codeToRemove) {
-        deleteCode(codeToRemove);
+        deleteCodeFromDB(codeToRemove);
       } else {
         status.textContent = "⚠️ Remove செய்ய Code எழுதவும்.";
       }
     };
 
-    // Open Page Button
+    // Open Button Click
     openBtn.onclick = () => {
       const enteredCode = input.value.trim();
-      const now = Date.now();
-      const codes = getAllCodes();
-      const valid = codes.find(c => c.code === enteredCode && now <= c.expiry);
-
-      if (valid) {
-        window.location.href = "unlock.html";
+      if (enteredCode) {
+        checkCodeValid(enteredCode);
       } else {
-        status.textContent = "❌ Invalid or Expired Code.";
+        status.textContent = "⚠️ Code எழுதவும்.";
       }
     };
   </script>
