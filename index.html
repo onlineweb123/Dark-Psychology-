@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="ta">
 <head>
   <meta charset="UTF-8" />
@@ -86,22 +88,21 @@
   <p>உன் காதலியின் மனதை புரிந்து கொள்ள ரகசியங்களை இப்போது திறக்கலாம் 💖</p>
 
   <!-- UPI PAY BUTTON -->
-  <button class="pay-btn" onclick="window.location.href='upi://pay?pa=mm05270331@oksbi&pn=LovePsychology&am=149&cu=INR&tn=Unlock+Love+Psychology'">
-    ₹149 Unlock Now UPI
+  <button class="pay-btn" onclick="window.open('upi://pay?pa=mm05270331@oksbi&pn=LovePsychology&am=149&cu=INR&tn=Unlock+Love+Psychology','_blank')">
+    ₹149 Unlock Now via UPI
   </button>
 
   <p>பணம் செலுத்திய பிறகு Screen Short ஐ எடுத்து instagram ல Message பண்ணால் உங்களுக்கு ஒரு Code தரப்படும் 
   <br> 
   
   <h1>
-  <a href="https://www.instagram.com/mind_reading01?utm_source=qr&igsh=MXNpMGZ1bHNiZ3NjZQ=="> instagram </a>
-  
+  <a href="https://www.instagram.com/mind_reading01?utm_source=qr&igsh=MXNpMGZ1bHNiZ3NjZQ==" target="_blank"> instagram </a>
   </h1>
   
   <br>
-  
   அந்த Code ஐ இங்கு போட்டால் Unlock ஆகும் 
-  </பர்>:</p>
+  </p>
+
   <input type="text" id="codeInput" placeholder="Enter Unlock Code" />
 
   <!-- Open Page Button -->
@@ -113,82 +114,66 @@
   <footer>&copy; 2025 All rights reserved.</footer>
 
   <script>
+    // ✅ Code list with expiry date (YYYY-MM-DD HH:MM)
     const allowedCodes = [
-    
-        <!-- A -->
-        "341627",
-        
-        <!-- B -->
-        "792833", 
-        
-        <!-- C -->
-        "108462",
-        
-        <!-- D -->
-        "573910", 
-        
-        <!-- E -->
-        "652134",
-        
-        <!-- F -->
-        "409285", 
-        
-        <!-- G -->
-        "871036", 
-        
-        <!-- H -->
-        "963421",
-        
-        <!-- I -->
-        "723048", 
-        
-        <!-- J -->
-        "510936",
-        
-        <!-- K -->
-        "184209", 
-        
-        <!-- L -->
-        "390572",
-        
-        <!-- M -->
-        "628471", 
-        
-        <!-- N -->
-        "746195",
-        
-        <!-- O -->
-        "287064",
-        
-        <!-- P -->
-        "915320", 
-        
-        <!-- Q -->
-        "360178",
-        
-        <!-- R -->
-        "894312",
-        
-        <!-- S -->
-        "235089",
-        
-        <!-- T -->
-        "671503"
-   
-   
+      { code: "341627", expiry: null }, // Unlimited (A)
+      { code: "792830", expiry: "2025-09-20 23:59" }, // B
+      { code: "108462", expiry: "2025-09-15 23:59" }, // C
+      { code: "573910", expiry: "2025-09-18 23:59" }, // D
+      { code: "652134", expiry: "2025-09-25 23:59" }, // E
+      { code: "409285", expiry: "2025-09-30 23:59" }, // F
+      { code: "871036", expiry: "2025-10-05 23:59" }, // G
+      { code: "963421", expiry: "2025-10-10 23:59" }, // H
+      { code: "723048", expiry: "2025-10-15 23:59" }, // I
+      { code: "510936", expiry: "2025-10-20 23:59" }, // J
+      { code: "184209", expiry: "2025-10-25 23:59" }, // K
+      { code: "390572", expiry: "2025-10-30 23:59" }, // L
+      { code: "628471", expiry: "2025-11-05 23:59" }, // M
+      { code: "746195", expiry: "2025-11-10 23:59" }, // N
+      { code: "287064", expiry: "2025-11-15 23:59" }, // O
+      { code: "915320", expiry: "2025-11-20 23:59" }, // P
+      { code: "360178", expiry: "2025-11-25 23:59" }, // Q
+      { code: "894312", expiry: "2025-11-30 23:59" }, // R
+      { code: "235089", expiry: "2025-12-05 23:59" }, // S
+      { code: "671503", expiry: "2025-12-10 23:59" }  // T
     ];
 
     function checkCode() {
       const code = document.getElementById("codeInput").value.trim();
       const status = document.getElementById("status");
+      const found = allowedCodes.find(c => c.code === code);
 
-      if (allowedCodes.includes(code)) {
+      if (!found) {
+        status.textContent = "❌ தவறான Code. தயவுசெய்து சரியான Code ஐ உள்ளிடவும்.";
+        return;
+      }
+
+      // Unlimited check
+      if (found.expiry === null) {
+        window.location.href = "unlock.html";
+        return;
+      }
+
+      // Date check
+      const now = new Date();
+      const expiryDate = new Date(found.expiry.replace(" ", "T"));
+
+      if (now <= expiryDate) {
         window.location.href = "unlock.html";
       } else {
-        status.textContent = "❌ தவறான Code. தயவுசெய்து சரியான Code ஐ உள்ளிடவும்.";
+        status.textContent = "⏰ இந்த Code Expired ஆகிவிட்டது. தயவுசெய்து புதிய Code பெறவும்.";
       }
     }
+
+    // Press Enter support
+    document.getElementById("codeInput").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") checkCode();
+    });
   </script>
 
 </body>
+</html>
+
+
+
 </html>
