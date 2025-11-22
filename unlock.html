@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ta">
 <head>
   <meta charset="UTF-8" />
@@ -58,6 +59,35 @@
       color: #999;
       font-size: 0.95rem;
     }
+    
+    /* TTS Button Style Start */
+.tts-button {
+  background: #8e2de2; /* Gradient color start */
+  color: #f5f5f5;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: 'Noto Sans Tamil', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  transition: background 0.3s ease;
+  display: block; /* Make it take full width for better touch on mobile */
+  width: 100px; /* Specific width */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tts-button:hover {
+  background: #ff007f; /* Gradient color end on hover */
+}
+
+.tts-button:active {
+  transform: translateY(1px);
+}
+/* TTS Button Style End */
+
+    
   </style>
 </head>
 
@@ -73,38 +103,74 @@
 
   
     <!-- START 1 TO 50 -->
+   
 
-<section>
+<section>   
+    
+     <button class="tts-button" id="ttsButton_1" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>1. பெண்கள் எவ்வாறு யோசிக்கிறார்கள்?</h2>
   <p>பெண்கள் பெரும்பாலும் உணர்வுகளின் அடிப்படையில் செயல்படுகிறார்கள். அவர்கள் masculine calmness-ஐ பாதுகாப்பு, நிலைத்துவம், நம்பிக்கை எனப் பொருள் கொண்டு உணர்கிறார்கள். அதனால்தான் மிகவும் அமைதியாக, but confident-ஆ இருப்பது பெண்களின் respect-ஐ ஈர்க்கும். உணர்ச்சிகரமான stability என்பதுதான் அவர்களுக்கு real strength.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_2" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>2. காதலின் ஆரம்ப கட்டம்: Soft Signal-கள்</h2>
   <p>பெண்கள் நேரடி அன்பு தெரிவிக்க Rare-ஆ செய்வார்கள். அவங்க ரசிக்கிறதை “Subtle Signals” மூலம் காட்டுவாங்க. இதில முக்கியமானவை: கண்ணோட்டம் (eye contact), மெதுவான சிரிப்பு (gentle smile), சில நேரம் கேட்கும் indirect questions. இது எல்லாமே "நான் உன்னை special-ஆ perceive பண்ணுறேன்" னு சொல்வது போல subtle language. இவை ஆரம்பிகிற இடம்தான் attraction build ஆக ஆரம்பிக்குது.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_3" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>3. உணர்வுகளை ஆழமாக புரிந்து பேசுவது</h2>
   <p>பெண்கள் மனதை கவரும் மிக முக்கியமான விசயம் – Genuine Listening. அவள் பேசும்போது முழு கவனத்தோட கேட்பது, அவள் சொல்லும் வார்த்தைகளுக்குப் பின்னாலிருக்கும் உணர்வுகளை உணர்ந்து பதிலளிப்பது – இதுவே Deep Listening. இது அவர்களுக்கு “நான் புரிந்துகொள்ளப்படுகிறேன்” என்ற deep emotional connection-ஐ தரும். இது தான் Attraction Power-ன் உண்மை மூலாதாரம். மேலும் reflective feedback-ஐ கொடுத்தால் – அதாவது அவள் சொன்னதை நுட்பமாகத் திரும்ப சொல்லினால் – bonding 3x ஆகும்.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_4" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>4. Hero Trigger</h2>
   <p>பெண்கள் உள்ளடக்கமாக தேடுவது – பாதுகாப்பு. அது physical security மட்டும் இல்ல; emotional stability, bold presence, and calm strength-ஐயும் சேர்த்தே. “நான் அவனிடம் பாதுகாப்பாக இருக்கிறேன்” என்ற உணர்வு வந்தால், அவள் மனதிலே நீ Hero ஆகிறாய். இத்தகைய masculine presence அவளுக்கு பாசம், நம்பிக்கை, dependency எல்லாம் ஒன்றாக வளர செய்யும். Real hero trigger என்பது – நீ இருப்பது அவளுக்கு ஒரு “emotional safety zone” ஆகிறது.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_5" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>5. Subtle Influence</h2>
   <p>அவளுடைய தினசரி routine-ல் நீயும் presence காட்டும்போது, அதுவே ஒரு emotional anchor ஆகிறது. Subtle-ஆ, காணாமல் invisibly அவளது நாளைய ஓட்டத்தில் நீ புகுந்து விடுகிறாய். அது ஒரு பாட்டு னால இருக்கலாம், ஒரு specific time msg அனுப்புற nature ஆக இருக்கலாம் – எந்த memory repeated-ஆ கிளம்புதோ அதில dopamine binding நடக்கும். நம்ம மூளையின் speciality என்னவென்றால், repeated emotional presence-ஐ attach பண்ணி addictive ஆகிடும். That’s how she’ll start missing you without realizing why.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_6" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>6. Body Language Reading</h2>
   <p>பெண்கள் சொல்லாததையும் – signal பண்ணுவாங்க. அவளுடைய முக அழுத்தங்கள் (facial expressions), கை சைகைகள் (gestures), உடல் நிலை (posture) – இவை எல்லாம் அவளது உணர்வுகளுக்கு நேரடி சாட்சி. நீ அவைகளை observe பண்ணி, அதனடிப்படையில் subtle-ஆ respond பண்ணினா, அது subconscious-ல் “இவன் எனக்குள் நுழைகிறான்” னு feel தரும். இது ஒரு silent communication pathway, இது தான் most powerful impression எங்கேயும் இல்லாம நுழைய வைக்கும் வழி.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_7" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>7. Hook Loop Strategy</h2>
   <p>Love-ல் எப்பவுமே direct continuous attention கொடுத்தா, boredom வரும். அதனால் தான் – “Ignore → Warm → Pull Back” னு ஒரு looping strategy-ஐ பயன்படுத்தணும்.  
 முதல் சில நாட்கள் emotional distance வைத்துக்கொள் (Ignore). பிறகு மெதுவாக approach பண்ணு (Warm). அது சிறிது நாள் நடந்த பிறகு, மீண்டும் கொஞ்சம் silent-ஆயிடு (Pull Back).  
@@ -113,6 +179,11 @@
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_8" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>8. Future Talk Strategy</h2>
   <p>“நாம அப்படி இருந்தா…” னு future imagination-ஐ trigger பண்ணும் moment-கள், அவளுடைய subconscious-ல emotional scenes-ஐ உருவாக்கும்.  
 அவளுடைய மனதில் நீயும் ஒரு role play பண்ண ஆரம்பிக்கிறாய் – அதுவே bonding-க்கு ஒரு shortcut.  
@@ -122,6 +193,11 @@ Main point என்னனா, அது “நீங்களிருவரு
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_9" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>9. அவள் பேசும் பாட்டர்னை கற்றுக்கொள்</h2>
   <p>அவள் பேசும் வேகம், வார்த்தைகள், உசிரோட்டம் (breath flow), pauses – இவை எல்லாம் அவளது energy pattern.  
 அதை நீ observe பண்ணி, மெதுவாக அதே rhythm-ல பேச ஆரம்பிச்சா, அது அவளுக்கு “இந்தவன் என்னோட wavelength-ல இருக்கான்” னு feel தரும்.  
@@ -131,6 +207,11 @@ Main point என்னனா, அது “நீங்களிருவரு
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_10" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>10. Mirror Technique</h2>
   <p>நம் மூளை நிறைய நேரம் “நம்ம மாதிரி நடந்தவங்க” மீது தனிச்சிறப்பான பரிச்சயம் காட்டும். இதை நீ பயன்படுத்தப் போற Mirror Technique.  
 அவள் உடல் மொழி (body language), கை சைகை (gesture), உட்காரும் position, hatta expressions – இவை எல்லாவற்றையும் மிக subtle-ஆ mirror பண்ணு.  
@@ -141,6 +222,11 @@ Main point என்னனா, அது “நீங்களிருவரு
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_11" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>11. Voice Toning Strategy</h2>
   <p>உன் குரல் தான் உன் Energy Signature. Calm masculine tone – இது தான் பெண்களுக்கு Protective + Attractive combo.  
 அவளிடம் பேசும்போது குரலுக்கு ஒரு stable, deep, slow rhythm வைத்துக்கொள்.  
@@ -151,6 +237,11 @@ Calm-ஆ, but Confident-ஆ பேசினா, அவளுக்கு நீ 
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_12" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>12. Mystery Hook</h2>
   <p>பெண்கள் predictable ஆ இருக்கிறவனுக்கு அளவளாவி பழகுவாங்க… ஆனா mind-ஐ fully capture பண்ணும் போது ஒரு small mystery முக்கியம்.  
 சில விஷயங்களை intention-ஆ சொல்லாம விட்டு விடு – curiosity உருவாக்கும்.  
@@ -161,6 +252,11 @@ Full reveal பண்ணாம, half-open story = Deep interest!</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_13" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>13. Presence Lock</h2>
   <p>ஒரு பெண் உணர்வுகளால் bond ஆகுறதுக்கு முன்னால், அவளுக்கு நீ ஒரு emotional constant-ஆ இருக்கணும்.  
 அதாவது – "நீ இல்லையென்றால் நானும் இல்லை" னு அவளுக்கு subtle-ஆ உணர்த்தணும்.  
@@ -171,6 +267,11 @@ Full reveal பண்ணாம, half-open story = Deep interest!</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_14" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>14. Slow Reaction Trick</h2>
   <p>அவள் ஒரு விசயம் சொன்னதும் உடனே react பண்ணுறதுக்கு பதிலா, few seconds calm-ஆ stay பண்ணு.  
 அது ஒரு thought process மாதிரி தெரியணும் – “இவன் quick emotional இல்லை” னு அவளுக்கு feel ஆகும்.  
@@ -181,6 +282,11 @@ Full reveal பண்ணாம, half-open story = Deep interest!</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_15" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>15. Story Insert</h2>
   <p>அவள் ஒரு memory, experience, அல்லது situation share பண்ணும்போது, நீயும் அதே emotion feel பண்ணிய ஒரு story-ஐ insert பண்ணு.  
 இதனால் இரண்டு benefit கிடைக்கும்:  
@@ -193,6 +299,11 @@ Full reveal பண்ணாம, half-open story = Deep interest!</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_16" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>16. Compliment Echo</h2>
   <p>ஒரு பெண் compliments கொடுக்கிற போது, அது ஒரு "emotional investment".  
 அந்த compliments-ஐ நீ casual-ஆ எடுத்துட்டு போய்டாதே… அதை echo பண்ணு – reflective-ஆ back கொடு.  
@@ -204,6 +315,11 @@ Full reveal பண்ணாம, half-open story = Deep interest!</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_17" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>17. Controlled Ignore</h2>
   <p>அவளோட message-க்கு ஒவ்வொரு முறையும் உடனே பதில் சொன்னா, அவளுக்கு “availability overload” ஏற்படும்.  
 அதனால், சில நேரங்களில் மெல்ல delay பண்ணு… அல்லது ஒரு-இரண்டு message-ஐ skip பண்ணு.  
@@ -214,6 +330,11 @@ Too much ignore பண்ணக்கூடாது – just enough to keep her
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_18" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>18. Eye Lock Pattern</h2>
   <p>அவளோட கண்களை நேரடியாகப் பார்த்து, ஒரு சில விநாடிகள் மட்டும் eye contact வைச்சுக்க.  
 அதிலும் Right Eye-க்கு Focus பண்ணு – இது emotion reading eye.  
@@ -225,6 +346,11 @@ Eye Lock = Trust + Chemistry + Presence proof.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_19" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>19. Voice Pause Magic</h2>
   <p>சில நேரம் நாம் சொல்லும் வார்த்தைகளுக்கு விட silence தான் deep meaning-ஐ create பண்ணும்.  
 அவளிடம் பேசும்போது சிறிய purposeful pauses வைச்சு பேசு – அந்த second-கள் அவளோட focus-ஐ lock பண்ணும்.  
@@ -237,6 +363,11 @@ Subtle pause = Emotional Weight.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_20" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>20. Emotional Blueprint Match</h2>
   <p>ஒரு பெண் அவளுடைய painful அல்லது deep emotional past-ஐ share பண்ணும்போது, அது அவளோட emotional blueprint.  
 அதை நீ கவனமா கேட்டு, அதே emotion-ஐ உனோட experience-ல் இருந்து match பண்ணு.  
@@ -248,6 +379,11 @@ Subtle pause = Emotional Weight.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_21" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>21. Anchor Memory Craft</h2>
   <p>ஒரு சின்ன memory – அதை மீண்டும் மீண்டும் right moments-ல் அவளிடம் குறிப்பிடுவது ஒரு anchor போல வேலை செய்யும்.  
 அவளோட subconscious mind அந்த நினைவோடு உன்னையும் permanently associate பண்ணிடும்.  
@@ -258,6 +394,11 @@ Anchor Memory = Emotional Shortcut to Connection.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_22" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>22. Reverse Question Method</h2>
   <p>அவள் உன்னிடம் ஒரு simple question கேட்டா, அதையே reverse பண்ணி அவளையே engage பண்ணு.  
 அது unexpected-ஆவும், playful-ஆவும் இருக்கும்.  
@@ -270,6 +411,11 @@ Reverse Questions = Mind Dance.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_23" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>23. Strategic Jealousy Cue</h2>
   <p>நீயும் மற்ற பெண்களும் connect-ஆ இருக்குறது போல subtle-ஆ ஒரு signal கொடு – open-ஆ jealousy provoke பண்ணாதே!  
 அவளோட மனசுக்குள்ள: “இவனோட attention வேற யாராவது எடுத்துடுவாங்களா?” னு ஒரு light tension கிளம்பணும்.  
@@ -281,6 +427,11 @@ Strategic Jealousy = Emotional Anchor + Attention Lock.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_24" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>24. Sensory Trigger Drop</h2>
   <p>மனசு நினைவுகள் நினைத்தால் வரும் – ஆனால் Body-யின் Five Senses Touch பண்ணுற memory-கள் மறக்க முடியாதவை.  
 அவளோட கண்ணுக்குள்ள, காதுக்குள்ள, மணத்துக்குள்ள, அல்லது touch-க்குள்ள நீ invisibly hook ஆகணும்.  
@@ -292,6 +443,11 @@ Sensory Triggers = Invisible Emotional Tattoos.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_25" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>25. Silent Touch Vibe</h2>
   <p>Touch பண்ணாமலே Touch போடறது சாத்தியமா? ஆமாம் – அதுவே Vibe-ல்!  
 அவளோட அருகில் நீ இருக்கும்போது, gestures, slow movements, relaxed body language – இவை எல்லாம் அவளுக்கு “presence feel”-ஐ கொடுக்கும்.  
@@ -302,6 +458,11 @@ Touch இல்லாமல் proximity vibe = Deep comfort + Safe desire.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_26" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>26. Pain Bond Bridge</h2>
   <p>Love-ல Deep Bond உருவாகுறது Happiness-ல இல்ல… Heart-ஐ திறக்க வைக்கும் Pain moments-ல தான்.  
 அவள் ஒரு hurt / past struggle share பண்ணும்போது – அதுக்குள்ளேயே நீயும் பக்கத்துல silently emotional support ஆக இருக்கணும்.  
@@ -314,8 +475,14 @@ Pain Bond = Deep Trust + Healing Link.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_27" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>27. Predict & Confirm Game</h2>
-  <p>அவளோட action-ஐ நீ guess பண்ணி சொன்னால், அதுவே அவளுக்கு ஒரு mini shock மாதிரி இருக்கும் – “இவன் என்னோட மனசுக்குள்ள வாசிக்கிறானா?” னு feel ஆகும்.  
+  <p>அவளோட action-ஐ நீ guess பண்ணி சொன்னால், அதுவே அவளுக்கு ஒரு mini 
+   மாதிரி இருக்கும் – “இவன் என்னோட மனசுக்குள்ள வாசிக்கிறானா?” னு feel ஆகும்.  
 அது ஒரு psychic connection மாதிரி deep emotional impression தரும்.  
 📌 Example:  
 நீ: “நீ இப்போ left-ல இருக்குற blue pen எடுத்துட்டு எழுத போற... சரியா?”  
@@ -325,7 +492,13 @@ Subtle behavior – walking style, reply timing, favorite snack, dialogue patter
 அவளோட inner world-க்கு நீ already நுழைந்துவிட்டாய் னு அவளே accept பண்ணுவாள்.  
 Predict & Confirm = Mind Bond + Subconscious Link.</p>
 </section>
+
 <section>
+    
+     <button class="tts-button" id="ttsButton_28" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>28. Teasing Loop</h2>
   <p>அவளை ஒரு playful teasing மூலம் attract பண்ணும் போது, அது ஒரு “Emotional Roller-Coaster” மாதிரி வேலை செய்யும் – அதாவது:  
 Light Fun → Friendly Challenge → Subtle Flirt.  
@@ -339,6 +512,11 @@ Teasing Loop = Flirt + Fun + Feel!</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_29" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>29. Micro Smile Sync</h2>
   <p>ஒரு பெண் நம்முடன் பேசும்போது சிரிக்கிறா? அதுவே ஒரு “Feel Safe” + “Feel Free” signal.  
 அந்த சிரிப்பை நீ observe பண்ணி, அதே emotion-ஐ mirror பண்ணனும் – same intensity-ல இல்லாம, subtle-ஆ.  
@@ -351,6 +529,11 @@ Repeated Micro-Sync = Long-Term Compatibility Signal.
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_30" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>30. Role Swap Hypnosis</h2>
   <p>நீ ஒரு situation-ஐ அவளோட role-ல இருந்து பார்த்த மாதிரி பேசுறதும், அவளையும் உன் role-ல வைத்து imagination trigger பண்ணுறதும் – அது தான் Role Swap Hypnosis.  
 இது அவள் எண்ணங்களில் “நம்ம இருவரும் ஒரே scene-ல இருக்கறோம்” னு ஒரு virtual closeness உருவாக்கும்.  
@@ -362,6 +545,11 @@ Role Swap = Mutual Mind Involvement + Emotional Insertion.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_31" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>31. Word Flow Mirror</h2>
   <p>ஒரு பெண் பேசும் போது, அவளோட சொற்கள், tone, speed, pause-ஐ நம்மும் subtle-ஆ mirror பண்ணினா, அது ஒரு *Unspoken Match* மாதிரி தோன்றும்.  
 அவளுக்கு தெரியாம, அவளே நம்மோட presence-ஐ comfortable-ஆ feel பண்ணுவாள்.  
@@ -373,6 +561,11 @@ Word Flow Mirror = Mind Sync Without Effort.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_32" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>32. Open Story Loop</h2>
   <p>ஒரு சின்ன கதையை ஆரம்பிச்சு, climax-க்கு முன்னாடி stop பண்ணி விடு – இது அவளது mind-ல் “unfinished curiosity” உருவாக்கும்.  
 அவளோட focus automatic-ஆ உன்னிடம் lock ஆகும் – அந்த முடிவை தெரிந்துக்கணும் னு inner urge வரும்.  
@@ -384,6 +577,11 @@ Open Story Loop = Mental Cliffhanger + Reconnect Trigger.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_33" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>33. Comfort Talk</h2>
   <p>பெண்கள் காதலுக்கு முன் தேடுவது – Safety & Emotional Security.  
 அவள் மனதுக்கு verbal-level-ல நீ அந்த safe zone ஆக மாறணும்.  
@@ -396,6 +594,11 @@ Comfort Talk = Trust Lock + Emotional Warmth.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_34" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>34. Vulnerability Show</h2>
   <p>ஒரு உண்மையான bond உருவாவதற்கு, நீயே முதலில் உன்னோட कमजोरी, பயம், நிஜ உணர்வுகள் பற்றி open ஆகனும்.  
 அது தான் அவளுக்கு “இவன் safe + real person” னு feel ஆக வைக்கும்.  
@@ -407,6 +610,11 @@ Vulnerability Show = Emotional Truth + Deep Bonding Permission.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_35" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>35. Pace Switch</h2>
   <p>ஒரே speed-ல் பேசுவது listener-க்கு predictable-ஆ இருக்கும்.  
 ஆனால் Pace-ஐ மாற்றி பேசினா – அதே conversation-ல Emotional Pull + Attention Lock இரண்டும் கிடைக்கும்.  
@@ -419,6 +627,11 @@ Pace Switch = Emotional Control + Attention Design.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_36" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>36. Visual Words</h2>
   <p>பேசும் போது உணர்வை மட்டும் அல்ல – காட்சிகளையும் வார்த்தைகளால் கொண்டு வரினா, அது மாறி மாறி மனதில் ஆட்டம் அடிக்கும்.  
 அவள் நினைக்கும்போதெல்லாம், அந்த Scene-ஐ பார்த்த மாதிரி இருக்கணும்.  
@@ -430,6 +643,11 @@ Visual Words = Emotional Cinema in Her Mind.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_37" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>37. Feminine Challenge</h2>
   <p>பெண்கள் playful teasing-ஐ விரும்புகிறார்கள், ஆனால் அதில் challenge இருக்கும்போது அவர்கள் involvement கூட அதிகமாகும்.  
 சின்ன சில tasks, dare, or fun condition-கள் மூலமா அவளை மனதில் hook பண்ணலாம்.  
@@ -441,6 +659,11 @@ Feminine Challenge = Playful Bond + Inner Spark Trigger.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_38" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>38. Guided Thought</h2>
   <p>அவளோட மனது என்னவென்று நீ நினைக்கிறாயோ, அதே பாதையில் அவளே யோசிக்க வைக்கவேண்டுமென்றால் – நீயே அந்த direction-ஐ subtle-ஆ suggest பண்ணனும்.  
 அவள் யோசிக்கறது அவளோட சுயநினைவு மாதிரி இருந்தாலும், அதற்குப் பின்னாலிருப்பது நம்ம trigger ஆகணும்.  
@@ -452,6 +675,11 @@ Guided Thought = Thought Implant Without Force.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_39" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>39. Recall Flash</h2>
   <p>ஒரு முக்கியமான convo, ஒரு emotional moment, அல்லது அவளோட favourite dialogue-ஐ நீ மீண்டும் subtly reference பண்ணினா – அது அவளுக்கு ஒரு nostalgic emotional spark ஆகி தோன்றும்.  
 அந்த memory-யை அவளே மறந்தாலும், நீ ஒவ்வொரு word, feel-ஐ perfectly re-call பண்ணும்போது – அவளோட subconscious attach ஆகும்.  
@@ -462,6 +690,11 @@ Recall Flash = Emotional Continuity + Feeling Replay.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_40" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>40. Unfinished Exit</h2>
   <p>Conversation-ஐ climax-க்கு முன்னாடி pause பண்ணுறது, ஒரு கதை பக்கத்தை தற்செயலா மூடுவது மாதிரி.  
 அது அவளுடைய mind-ல ஒரு loop ஆரம்பிக்க செய்யும் – “அவன் சொல்ல வந்தது என்ன?” னு அந்த thought வந்து வந்து திரும்பும்.  
@@ -474,6 +707,11 @@ Unfinished Exit = Mental Hold + Emotional Re-Entry Key.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_41" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>41. Daily Ritual Embed</h2>
   <p>அவள் தினசரி ஒரு விஷயத்தை செய்யும்போது – சுடச்சுட உன்னைக் கவனிக்காமலே நினைக்க வைக்கும் memory anchor set பண்ணணும்.  
 Routine + Reminder = Permanent Presence.  
@@ -486,6 +724,11 @@ Daily Ritual Embed = Routine Bond + Mind Lock.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_42" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>42. Mirror Compliment</h2>
   <p>பெண்கள் தங்களை பற்றிச் சில விஷயங்களை மனதுக்குள் எண்ணிக்கொள்கிறார்கள் – “நான் calm-ஆ இருக்கணும்”, “நான் different” எனும் self-perception.  
 அந்த self-image-ஐ நீயே reflect பண்ணும்போது, அவளுக்கு “இவன் நம்ம உண்மையா புரிஞ்சிருக்கான்” னு feel வரும்.  
@@ -498,6 +741,11 @@ Mirror Compliment = Inner Identity Validation + Bonding Boost.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_43" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>43. Future Blend Talk</h2>
   <p>ஒரு பெண், நம்ம future-ல இருக்குறதை மனதில் imagine பண்ண ஆரம்பிக்கிறாள் என்றால் – Emotional Investment Start ஆயிடுது.  
 அவளோட imaginary life-க்கு நீயே பங்காளி ஆகி விட்டாய்.  
@@ -510,6 +758,11 @@ Future Blend Talk = Imagination Entry + Life Lock.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_44" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>44. Scarcity Pattern</h2>
   <p>ஒரே மாதிரி எப்போதும் message, reply, presence-ஆ இருந்தால் – அது வழக்கமானது ஆகிவிடும்.  
 ஆனால் நீ கொஞ்சம் space கொடுத்தால், அதை நீங்கிய உணர்வும் longing-ஐ உருவாக்கும்.  
@@ -523,6 +776,11 @@ Scarcity Pattern = Presence Value × Emotional Demand.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_45" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>45. Time Anchor Recall</h2>
   <p>ஒரு குறிப்பிட்ட உணர்வுடன் வந்த நிகழ்வை மீண்டும் அவளோட மனதில் தூண்டினா, அந்த நேரத்தோட Emotion முழுவதும் மீண்டும் எழும்.  
 இதை நாம் “Anchor” மாதிரி பயன்படுத்தலாம் – அந்த memory trigger செய்தால் bonding react ஆகும்.  
@@ -535,6 +793,11 @@ Time Anchor Recall = Past Feel Reload + Present Bond Amplify.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_46" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>46. Double Meaning Talk</h2>
   <p>ஒரே ஒரு வார்த்தை, ஒரே ஒரு மொத்தமான line – ஆனால் அவள் அது இரண்டு விதமாக interpret பண்ணுவாள்.  
 ஒரு level-ல innocent… மறுபக்கம் எங்கேயோ heart beat speed ஆகும் மாதிரி!  
@@ -547,6 +810,11 @@ Double Meaning Talk = Innocence + Intrigue + Emotional Chemistry.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_47" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>47. Smile Delay</h2>
   <p>நீ அவள் joke-க்கு அல்லது moment-க்கு உடனே react பண்ணாம, 2 second delay-ஆன smile கொடுத்தா – அதுவே ஒரு calm confidence-ஆ கூடவே mystery-ஐயும் காட்டும்.  
 அவள் mind-ல: “இவன் ரொம்ப confident… predictable இல்ல” னு feel வரும்.  
@@ -558,6 +826,11 @@ Smile Delay = Masculine Calmness + Emotional Gravity.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_48" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>48. Trust Frame</h2>
   <p>ஒரு பெண்ணிடம் நம்ம real feelings-ஐ பேசணும் என்றால், முதலில் அவளுக்கு “இவன் நம்மை நம்புறான்” னு feel வரணும்.  
 அதை ஒரு simple but powerful phrase-ல் சொல்லலாம் –  
@@ -570,6 +843,11 @@ Trust Frame = Emotional Access Permission + Mutual Openness Trigger.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_49" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>49. Playful Future Seed</h2>
   <p>ஒரு cute future situation-ஐ fun-ஆன tone-ல் சொன்னா, அவள் முதலில் சிரித்தாலும்… subconscious-ல அதை process பண்ணி future-ல் நம்மோட இடத்தை build பண்ணும்.  
 இந்த method imagination + laughter combo-வாக வேலை செய்யும்.  
@@ -581,6 +859,11 @@ Playful Future Seed = Imagination + Emotional Planting.</p>
 </section>
 
 <section>
+    
+     <button class="tts-button" id="ttsButton_50" onclick="speakSection(this)" disabled>
+        🗣️ பேசு <span class="loading-indicator">⏳</span>
+      </button>
+    
   <h2>50. Echo Exit</h2>
   <p>Conversation முடிவில் ஒரு emotionally impactful line சொல்லி வெளியேறினா – அது அவள் மனதில் “இந்த moment special” னு permanently set ஆகும்.  
 அந்த line-ஐ அவள் மீண்டும் மீண்டும் நினைப்பாள் – அந்த feel-ஐ lock பண்ணும்.  
@@ -605,8 +888,130 @@ Echo Exit = Final Impression Lock + Memory Echo Pattern.</p>
   </footer>
 
   <!-- Disable right-click -->
-  <script>
+       
+      <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+    
+    const synth = window.speechSynthesis;
+    let currentUtterance = null;
+    let tamilVoice = null; 
+
+    // பட்டன்களை இயக்கி, Loading Indicator-ஐ மறைக்கும் செயல்பாடு
+    function enableTTSButtons() {
+        const buttons = document.querySelectorAll('.tts-button');
+        buttons.forEach(button => {
+            button.removeAttribute('disabled');
+            // Loading Indicator-ஐ மறைத்தல்
+            const indicator = button.querySelector('.loading-indicator');
+            if (indicator) {
+                indicator.style.display = 'none';
+            }
+        });
+        console.log("TTS Buttons Enabled.");
+    }
+    
+    // குரல்களைப் பெறும் மற்றும் தமிழ் குரலைக் கண்டறியும் செயல்பாடு
+    function populateVoiceList() {
+        const voices = synth.getVoices();
+        // ta-IN அல்லது ta-LK குரலைத் தேடுகிறது
+        tamilVoice = voices.find(voice => voice.lang.startsWith('ta-'));
+        
+        if (!tamilVoice && voices.length > 0) {
+            // தமிழ் குரல் இல்லையென்றால், முதல் குரலைப் பயன்படுத்துகிறது
+            tamilVoice = voices[0];
+            console.log("Tamil voice not found, using the first available voice.");
+        } else if (tamilVoice) {
+            console.log("Tamil voice found:", tamilVoice.name);
+        } else {
+            console.log("No voices available.");
+        }
+        
+        // குரல் கிடைத்தவுடன் பட்டன்களை இயக்கி (Enable) விடு
+        if (tamilVoice || voices.length > 0) {
+            enableTTSButtons();
+        }
+    }
+
+    // 2. குரல்கள் மாறுதல் நிகழ்வைக் கையாளுதல்
+    if (synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = populateVoiceList;
+    }
+    // பிரவுசர்கள் ஏற்றப்படும்போது, ஒரு முறை கைமுறையாக அழைக்கவும்
+    populateVoiceList();
+
+    // 3. பேச்சை நிறுத்தி, பட்டனை ரீசெட் செய்யும் செயல்பாடு
+    function stopSpeech(button) {
+        if (synth.speaking && currentUtterance) {
+            synth.cancel();
+            button.textContent = "🗣️ பேசு";
+            button.onclick = function() { speakSection(button); };
+            currentUtterance = null;
+        }
+    }
+
+    // 4. பேசும் செயல்பாட்டைத் தொடங்குதல்
+    function speakSection(button) {
+        
+        // ஏற்கனவே பேசிக்கொண்டிருந்தால், அதை நிறுத்து
+        if (synth.speaking) {
+            stopSpeech(button);
+            setTimeout(() => speakSection(button), 100); 
+            return;
+        }
+        
+        // சம்பந்தப்பட்ட பிரிவின் உரையைக் கண்டறிதல்
+        const section = button.closest('section');
+        // Loading Indicator-ஐ மீண்டும் சேர்க்கத் தேவையில்லை
+        const textToRead = section ? section.innerText.replace(button.textContent, '').trim() : '';
+
+        if (!textToRead) {
+            return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        
+        // கண்டறியப்பட்ட தமிழ் குரலைப் பயன்படுத்துதல்
+        if (tamilVoice) {
+            utterance.voice = tamilVoice;
+            utterance.lang = 'ta-IN'; 
+        }
+
+        // பேச்சுக்கான பண்புகளை அமைத்தல் (வேகம், சுருதி)
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        
+        currentUtterance = utterance;
+        
+        // பட்டனின் உரையை நிறுத்து என்று மாற்றுதல்
+        button.textContent = "⏹️ நிறுத்து";
+        button.onclick = function() { stopSpeech(button); };
+        
+        // பேச்சு முடிந்த பிறகு பட்டனை மீண்டும் ரீசெட் செய்தல்
+        utterance.onend = function() {
+            button.textContent = "🗣️ பேசு";
+            button.onclick = function() { speakSection(button); };
+            currentUtterance = null;
+        };
+        
+        // பிழை ஏற்பட்டால்
+        utterance.onerror = function(event) {
+            alert(`Text-to-Speech பிழை: ${event.error}.`);
+            stopSpeech(button); // பிழையால் பேச்சை நிறுத்து
+        };
+        
+        // பேச்சைத் தொடங்குதல்
+        synth.speak(utterance);
+    }
   </script>
+    
+    
+    
+      
+      
+      
+      
+      
+      
+
 </body>
 </html>
