@@ -934,27 +934,106 @@ Echo Exit = Final Impression Lock + Memory Echo Pattern.</p>
   <!-- Disable right-click -->
 
       <script>
+    // வலது கிளிக் செய்வதைத் தடுத்தல் (Right-click prevention)
     document.addEventListener('contextmenu', event => event.preventDefault());
 
+    // --- மாறிகள் (Global Variables) ---
     const synth = window.speechSynthesis;
+    const globalButton = document.getElementById('globalTtsButton'); // Floating Button
+    const globalIcon = document.getElementById('globalTtsIcon');     // Button Icon
     let currentUtterance = null;
-    let tamilVoice = null; 
+    let tamilVoice = null;
+    let allText = ''; // மொத்தப் பக்கத்தின் உரையைச் சேமிக்க
 
-    // பட்டன்களை இயக்கி, Loading Indicator-ஐ மறைக்கும் செயல்பாடு
-    function enableTTSButtons() {
-        const buttons = document.querySelectorAll('.tts-button');
-        buttons.forEach(button => {
-            button.removeAttribute('disabled');
-            // Loading Indicator-ஐ மறைத்தல்
-            const indicator = button.querySelector('.loading-indicator');
-            if (indicator) {
-                indicator.style.display = 'none';
-            }
+    // --- 1. மொத்த உரையை எடுக்கும் செயல்பாடு ---
+    function extractAllText() {
+        // <header> மற்றும் <main> பகுதியில் உள்ள அனைத்து உரைகளையும் பிரித்து எடு
+        // h1, h2, p elements-ஐ மட்டும் பிரித்து எடுத்து, வாசிக்கும் போது pause-க்காக '. \n' சேர்க்கிறோம்.
+        const contentSections = document.querySelectorAll('header, main section');
+        let fullText = '';
+        
+        contentSections.forEach(element => {
+            const textElements = element.querySelectorAll('h1, h2, p');
+            textElements.forEach(textEl => {
+                fullText += textEl.textContent.trim() + '. \n';
+            });
         });
-        console.log("TTS Buttons Enabled.");
+        
+        allText = fullText;
+        console.log("Total text extracted.");
+    }
+    
+    // --- 2. Floating Button-ஐ இயக்குதல் (Enable) ---
+    function enableGlobalButton() {
+        if (!globalButton) {
+            console.error("Floating TTS Button (globalTtsButton) not found in HTML.");
+            return;
+        }
+        extractAllText(); // உரையை ஒரு முறை பிரித்தெடு
+        globalButton.removeAttribute('disabled');
+        globalIcon.textContent = "▶️";
+        globalButton.onclick = startGlobalSpeech; // கிளிக் ஈவென்ட்டை அமைத்தல்
+        console.log("Global TTS Button Enabled.");
     }
 
-    // குரல்களைப் பெறும் மற்றும் தமிழ் குரலைக் கண்டறியும் செயல்பாடு
+    // --- 3. பேச்சை நிறுத்தும் செயல்பாடு ---
+    function stopGlobalSpeech() {
+        if (synth.speaking) {
+            synth.cancel();
+            globalIcon.textContent = "▶️";
+            currentUtterance = null;
+        }
+    }
+
+    // --- 4. Floating Button கிளிக் செய்யப்பட்டால் (பேச்சைத் தொடங்குதல்) ---
+    function startGlobalSpeech() {
+        if (synth.speaking) {
+            // பேசிக் கொண்டிருந்தால், நிறுத்து
+            stopGlobalSpeech();
+            return;
+        }
+
+        if (!allText) {
+            extractAllText(); 
+            if (!allText) {
+                alert("படிக்க உரை ஏதுமில்லை.");
+                return;
+            }
+        }
+
+        const utterance = new SpeechSynthesisUtterance(allText);
+
+        // கண்டறியப்பட்ட தமிழ் குரலைப் பயன்படுத்துதல்
+        if (tamilVoice) {
+            utterance.voice = tamilVoice;
+            utterance.lang = 'ta-IN';
+        }
+
+        // பேச்சுக்கான பண்புகளை அமைத்தல் (வேகம், சுருதி)
+        utterance.rate = 0.9; 
+        utterance.pitch = 1.0;
+
+        currentUtterance = utterance;
+        globalIcon.textContent = "⏸️"; // பட்டனை 'நிறுத்து' என்று மாற்றுதல்
+
+        // பேச்சு முடிந்த பிறகு பட்டனை மீண்டும் ரீசெட் செய்தல்
+        utterance.onend = function() {
+            globalIcon.textContent = "▶️";
+            currentUtterance = null;
+        };
+
+        // பிழை ஏற்பட்டால்
+        utterance.onerror = function(event) {
+            console.error(`Text-to-Speech பிழை: ${event.error}.`);
+            alert(`Text-to-Speech பிழை: ${event.error}.`);
+            stopGlobalSpeech();
+        };
+
+        // பேச்சைத் தொடங்குதல்
+        synth.speak(utterance);
+    }
+
+    // --- 5. குரல்களைப் பெறும் மற்றும் தமிழ் குரலைக் கண்டறியும் செயல்பாடு (Initialization) ---
     function populateVoiceList() {
         const voices = synth.getVoices();
         // ta-IN அல்லது ta-LK குரலைத் தேடுகிறது
@@ -966,226 +1045,26 @@ Echo Exit = Final Impression Lock + Memory Echo Pattern.</p>
             console.log("Tamil voice not found, using the first available voice.");
         } else if (tamilVoice) {
             console.log("Tamil voice found:", tamilVoice.name);
-        } else {
-            console.log("No voices available.");
-        }
-
-        // குரல் கிடைத்தவுடன் பட்டன்களை இயக்கி (Enable) விடு
-        if (tamilVoice || voices.length > 0) {
-            enableTTSButtons();
-        }
-    }
-
-    // 2. குரல்கள் மாறுதல் நிகழ்வைக் கையாளுதல்
-    if (synth.onvoiceschanged !== undefined) {
-      synth.onvoiceschanged = populateVoiceList;
-    }
-    // பிரவுசர்கள் ஏற்றப்படும்போது, ஒரு முறை கைமுறையாக அழைக்கவும்
-    populateVoiceList();
-
-    // 3. பேச்சை நிறுத்தி, பட்டனை ரீசெட் செய்யும் செயல்பாடு
-    function stopSpeech(button) {
-        if (synth.speaking && currentUtterance) {
-            synth.cancel();
-            button.textContent = "🗣️ பேசு";
-            button.onclick = function() { speakSection(button); };
-            currentUtterance = null;
-        }
-    }
-
-    // 4. பேசும் செயல்பாட்டைத் தொடங்குதல்
-    function speakSection(button) {
-
-        // ஏற்கனவே பேசிக்கொண்டிருந்தால், அதை நிறுத்து
-        if (synth.speaking) {
-            stopSpeech(button);
-            setTimeout(() => speakSection(button), 100); 
-            return;
-        }
-
-        // சம்பந்தப்பட்ட பிரிவின் உரையைக் கண்டறிதல்
-        const section = button.closest('section');
-        // Loading Indicator-ஐ மீண்டும் சேர்க்கத் தேவையில்லை
-        const textToRead = section ? section.innerText.replace(button.textContent, '').trim() : '';
-
-        if (!textToRead) {
-            return;
-        }
-
-        const utterance = new SpeechSynthesisUtterance(textToRead);
-
-        // கண்டறியப்பட்ட தமிழ் குரலைப் பயன்படுத்துதல்
-        if (tamilVoice) {
-            utterance.voice = tamilVoice;
-            utterance.lang = 'ta-IN'; 
-        }
-
-        // பேச்சுக்கான பண்புகளை அமைத்தல் (வேகம், சுருதி)
-        utterance.rate = 0.9;
-        utterance.pitch = 1.0;
-
-        currentUtterance = utterance;
-
-        // பட்டனின் உரையை நிறுத்து என்று மாற்றுதல்
-        button.textContent = "⏹️ நிறுத்து";
-        button.onclick = function() { stopSpeech(button); };
-
-        // பேச்சு முடிந்த பிறகு பட்டனை மீண்டும் ரீசெட் செய்தல்
-        utterance.onend = function() {
-            button.textContent = "🗣️ பேசு";
-            button.onclick = function() { speakSection(button); };
-            currentUtterance = null;
-        };
-
-        // பிழை ஏற்பட்டால்
-        utterance.onerror = function(event) {
-            alert(`Text-to-Speech பிழை: ${event.error}.`);
-            stopSpeech(button); // பிழையால் பேச்சை நிறுத்து
-        };
-
-        // பேச்சைத் தொடங்குதல்
-        synth.speak(utterance);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    const synth = window.speechSynthesis;
-    const globalButton = document.getElementById('globalTtsButton');
-    const globalIcon = document.getElementById('globalTtsIcon');
-    let currentUtterance = null;
-    let tamilVoice = null;
-    let allText = ''; // மொத்தப் பக்கத்தின் உரையைச் சேமிக்க
-
-    // --- 1. குரல்களைப் பெறும் மற்றும் தமிழ் குரலைக் கண்டறியும் செயல்பாடு ---
-    function populateVoiceList() {
-        const voices = synth.getVoices();
-        tamilVoice = voices.find(voice => voice.lang.startsWith('ta-'));
-
-        if (!tamilVoice && voices.length > 0) {
-            tamilVoice = voices[0];
-            console.log("Tamil voice not found, using the first available voice.");
-        } else if (tamilVoice) {
-            console.log("Tamil voice found:", tamilVoice.name);
-        } else {
-            console.log("No voices available.");
         }
 
         // குரல் கிடைத்தவுடன் பட்டனை இயக்கி (Enable) விடு
-        if (tamilVoice || voices.length > 0) {
+        if (globalButton && (tamilVoice || voices.length > 0)) {
             enableGlobalButton();
-        }
-    }
-
-    // 2. மொத்த உரையை எடுக்கும் செயல்பாடு
-    function extractAllText() {
-        // <header>, <main> பகுதியில் உள்ள அனைத்து உரைகளையும் பிரித்து எடு
-        const contentSections = document.querySelectorAll('header, main section');
-        let fullText = '';
-        
-        contentSections.forEach(element => {
-            // தலைப்புகள் மற்றும் Paragraph-களை மட்டும் எடு
-            const textElements = element.querySelectorAll('h1, h2, p');
-            textElements.forEach(textEl => {
-                fullText += textEl.textContent.trim() + '. \n'; // வாசிக்கும் போது ஒரு pause-க்காக . \n சேர்க்கிறோம்
-            });
-        });
-        
-        allText = fullText;
-        console.log("Total text extracted.");
-    }
-    
-    // 3. Floating Button-ஐ இயக்குதல்
-    function enableGlobalButton() {
-        extractAllText(); // உரையை ஒரு முறை பிரித்தெடு
-        globalButton.removeAttribute('disabled');
-        // ஆரம்பத்தில் இருந்த தனிப்பட்ட பட்டன் Loading Indicator-ஐ நீக்கிவிட்டோம், அதனால் இங்கேயும் நீக்கப்படுகிறது.
-        globalIcon.textContent = "▶️";
-        globalButton.onclick = startGlobalSpeech; // கிளிக் ஈவென்ட்டை அமைத்தல்
-        console.log("Global TTS Button Enabled.");
-    }
-
-    // 4. Floating Button கிளிக் செய்யப்பட்டால்
-    function startGlobalSpeech() {
-        if (synth.speaking) {
-            // பேசிக் கொண்டிருந்தால், நிறுத்து
-            stopGlobalSpeech();
-            return;
-        }
-
-        if (!allText) {
-            extractAllText(); // உரையை மீண்டும் பிரித்தெடு
-            if (!allText) {
-                alert("படிக்க உரை ஏதுமில்லை.");
-                return;
-            }
-        }
-
-        const utterance = new SpeechSynthesisUtterance(allText);
-
-        if (tamilVoice) {
-            utterance.voice = tamilVoice;
-            utterance.lang = 'ta-IN';
-        }
-
-        utterance.rate = 0.9; 
-        utterance.pitch = 1.0;
-
-        currentUtterance = utterance;
-
-        globalIcon.textContent = "⏸️"; // பட்டனை 'நிறுத்து' என்று மாற்றுதல்
-
-        // பேச்சு முடிந்த பிறகு பட்டனை மீண்டும் ரீசெட் செய்தல்
-        utterance.onend = function() {
-            globalIcon.textContent = "▶️";
-            currentUtterance = null;
-        };
-
-        // பிழை ஏற்பட்டால்
-        utterance.onerror = function(event) {
-            alert(`Text-to-Speech பிழை: ${event.error}.`);
-            stopGlobalSpeech();
-        };
-
-        // பேச்சைத் தொடங்குதல்
-        synth.speak(utterance);
-    }
-
-    // 5. பேச்சை நிறுத்தும் செயல்பாடு
-    function stopGlobalSpeech() {
-        if (synth.speaking) {
-            synth.cancel();
-            globalIcon.textContent = "▶️";
-            currentUtterance = null;
+        } else if (globalButton) {
+             console.log("No voices available, button remains disabled.");
         }
     }
 
     // --- நிகழ்வுகளை அமைத்தல் ---
-    // 6. குரல்கள் மாறுதல் நிகழ்வைக் கையாளுதல்
+    // குரல்கள் மாறுதல் நிகழ்வைக் கையாளுதல்
     if (synth.onvoiceschanged !== undefined) {
       synth.onvoiceschanged = populateVoiceList;
     }
+    
     // பிரவுசர்கள் ஏற்றப்படும்போது, ஒரு முறை கைமுறையாக அழைக்கவும்
     populateVoiceList();
-    extractAllText(); // பக்கத்தை ஏற்றியவுடன் உரையை பிரித்தெடு
 
-
-    
-    
-    
-    
-  </script>
+</script>
 
 
 
