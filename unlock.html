@@ -933,111 +933,50 @@ Echo Exit = Final Impression Lock + Memory Echo Pattern.</p>
 
   <!-- Disable right-click -->
 
-      <script>
-    // வலது கிளிக் செய்வதைத் தடுத்தல் (Right-click prevention)
+    <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // --- மாறிகள் (Global Variables) ---
     const synth = window.speechSynthesis;
-    const globalButton = document.getElementById('globalTtsButton'); // Floating Button
-    const globalIcon = document.getElementById('globalTtsIcon');     // Button Icon
-    let currentUtterance = null;
     let tamilVoice = null;
-    let allText = ''; // மொத்தப் பக்கத்தின் உரையைச் சேமிக்க
+    let currentUtterance = null;
+    let readingAll = false; // உலகளாவிய வாசிப்பைக் கண்காணிக்க
+    const sections = document.querySelectorAll('section');
+    let currentSectionIndex = -1; // இப்போது வாசிக்கும் பிரிவின் குறியீடு
 
-    // --- 1. மொத்த உரையை எடுக்கும் செயல்பாடு ---
-    function extractAllText() {
-        // <header> மற்றும் <main> பகுதியில் உள்ள அனைத்து உரைகளையும் பிரித்து எடு
-        // h1, h2, p elements-ஐ மட்டும் பிரித்து எடுத்து, வாசிக்கும் போது pause-க்காக '. \n' சேர்க்கிறோம்.
-        const contentSections = document.querySelectorAll('header, main section');
-        let fullText = '';
-        
-        contentSections.forEach(element => {
-            const textElements = element.querySelectorAll('h1, h2, p');
-            textElements.forEach(textEl => {
-                fullText += textEl.textContent.trim() + '. \n';
-            });
+    const globalTtsButton = document.getElementById('globalTtsButton');
+    const globalTtsIcon = document.getElementById('globalTtsIcon');
+    const mainContent = document.getElementById('mainContent');
+
+    // தனிப்பட்ட பட்டன்களின் உரையை மீட்டமைக்கவும்
+    function resetAllSectionButtons() {
+        const buttons = document.querySelectorAll('.tts-button');
+        buttons.forEach(button => {
+            button.textContent = "🗣️ பேசு";
+            button.classList.remove('active-reading'); // வாசிக்கும் நிலையை நீக்கவும்
+            button.onclick = function() { speakSection(button); };
         });
-        
-        allText = fullText;
-        console.log("Total text extracted.");
-    }
-    
-    // --- 2. Floating Button-ஐ இயக்குதல் (Enable) ---
-    function enableGlobalButton() {
-        if (!globalButton) {
-            console.error("Floating TTS Button (globalTtsButton) not found in HTML.");
-            return;
-        }
-        extractAllText(); // உரையை ஒரு முறை பிரித்தெடு
-        globalButton.removeAttribute('disabled');
-        globalIcon.textContent = "▶️";
-        globalButton.onclick = startGlobalSpeech; // கிளிக் ஈவென்ட்டை அமைத்தல்
-        console.log("Global TTS Button Enabled.");
     }
 
-    // --- 3. பேச்சை நிறுத்தும் செயல்பாடு ---
-    function stopGlobalSpeech() {
-        if (synth.speaking) {
-            synth.cancel();
-            globalIcon.textContent = "▶️";
-            currentUtterance = null;
-        }
-    }
-
-    // --- 4. Floating Button கிளிக் செய்யப்பட்டால் (பேச்சைத் தொடங்குதல்) ---
-    function startGlobalSpeech() {
-        if (synth.speaking) {
-            // பேசிக் கொண்டிருந்தால், நிறுத்து
-            stopGlobalSpeech();
-            return;
-        }
-
-        if (!allText) {
-            extractAllText(); 
-            if (!allText) {
-                alert("படிக்க உரை ஏதுமில்லை.");
-                return;
+    // உலகளாவிய பட்டனை இயக்கவும், Loading Indicator-ஐ மறைக்கவும்
+    function enableTTSButtons() {
+        const buttons = document.querySelectorAll('.tts-button');
+        buttons.forEach(button => {
+            button.removeAttribute('disabled');
+            const indicator = button.querySelector('.loading-indicator');
+            if (indicator) {
+                indicator.style.display = 'none';
             }
-        }
-
-        const utterance = new SpeechSynthesisUtterance(allText);
-
-        // கண்டறியப்பட்ட தமிழ் குரலைப் பயன்படுத்துதல்
-        if (tamilVoice) {
-            utterance.voice = tamilVoice;
-            utterance.lang = 'ta-IN';
-        }
-
-        // பேச்சுக்கான பண்புகளை அமைத்தல் (வேகம், சுருதி)
-        utterance.rate = 0.9; 
-        utterance.pitch = 1.0;
-
-        currentUtterance = utterance;
-        globalIcon.textContent = "⏸️"; // பட்டனை 'நிறுத்து' என்று மாற்றுதல்
-
-        // பேச்சு முடிந்த பிறகு பட்டனை மீண்டும் ரீசெட் செய்தல்
-        utterance.onend = function() {
-            globalIcon.textContent = "▶️";
-            currentUtterance = null;
-        };
-
-        // பிழை ஏற்பட்டால்
-        utterance.onerror = function(event) {
-            console.error(`Text-to-Speech பிழை: ${event.error}.`);
-            alert(`Text-to-Speech பிழை: ${event.error}.`);
-            stopGlobalSpeech();
-        };
-
-        // பேச்சைத் தொடங்குதல்
-        synth.speak(utterance);
+        });
+        globalTtsButton.removeAttribute('disabled');
+        console.log("TTS Buttons Enabled.");
     }
 
-    // --- 5. குரல்களைப் பெறும் மற்றும் தமிழ் குரலைக் கண்டறியும் செயல்பாடு (Initialization) ---
+    // குரல்களைப் பெறும் மற்றும் தமிழ் குரலைக் கண்டறியும் செயல்பாடு
     function populateVoiceList() {
         const voices = synth.getVoices();
-        // ta-IN அல்லது ta-LK குரலைத் தேடுகிறது
-        tamilVoice = voices.find(voice => voice.lang.startsWith('ta-'));
+        // ta-IN, ta-LK அல்லது ta என தொடங்கும் குரலைத் தேடுகிறது
+        tamilVoice = voices.find(voice => voice.lang.startsWith('ta-')) ||
+                     voices.find(voice => voice.name.includes('Tamil'));
 
         if (!tamilVoice && voices.length > 0) {
             // தமிழ் குரல் இல்லையென்றால், முதல் குரலைப் பயன்படுத்துகிறது
@@ -1045,27 +984,150 @@ Echo Exit = Final Impression Lock + Memory Echo Pattern.</p>
             console.log("Tamil voice not found, using the first available voice.");
         } else if (tamilVoice) {
             console.log("Tamil voice found:", tamilVoice.name);
+        } else {
+            console.log("No voices available.");
         }
 
-        // குரல் கிடைத்தவுடன் பட்டனை இயக்கி (Enable) விடு
-        if (globalButton && (tamilVoice || voices.length > 0)) {
-            enableGlobalButton();
-        } else if (globalButton) {
-             console.log("No voices available, button remains disabled.");
+        // குரல் கிடைத்தவுடன் பட்டன்களை இயக்கி (Enable) விடு
+        if (tamilVoice || voices.length > 0) {
+            enableTTSButtons();
         }
     }
 
-    // --- நிகழ்வுகளை அமைத்தல் ---
-    // குரல்கள் மாறுதல் நிகழ்வைக் கையாளுதல்
+    // 2. குரல்கள் மாறுதல் நிகழ்வைக் கையாளுதல்
     if (synth.onvoiceschanged !== undefined) {
       synth.onvoiceschanged = populateVoiceList;
     }
-    
     // பிரவுசர்கள் ஏற்றப்படும்போது, ஒரு முறை கைமுறையாக அழைக்கவும்
     populateVoiceList();
 
-</script>
+    // 3. பேச்சை நிறுத்தி, அனைத்து பட்டன்களையும் ரீசெட் செய்யும் செயல்பாடு
+    function stopSpeech(button = null) {
+        if (synth.speaking) {
+            synth.cancel();
+        }
+        if (button) {
+            button.textContent = "🗣️ பேசு";
+            button.classList.remove('active-reading');
+            button.onclick = function() { speakSection(button); };
+        }
+        
+        // உலகளாவிய வாசிப்பை நிறுத்தவும்
+        readingAll = false;
+        currentSectionIndex = -1;
+        globalTtsIcon.textContent = "▶️";
+        
+        // மற்ற எல்லா பட்டன்களையும் மீட்டமைக்கவும்
+        resetAllSectionButtons();
+        currentUtterance = null;
+    }
 
+    // 4. ஒரு பிரிவைப் பேசும் செயல்பாட்டைத் தொடங்குதல் (தனிப்பட்ட பட்டன்கள்)
+    function speakSection(button) {
+        // ஏற்கனவே பேசிக்கொண்டிருந்தால், முழு வாசிப்பையும் நிறுத்து
+        stopSpeech();
+        
+        const section = button.closest('section');
+        const textToRead = section ? section.innerText.replace(button.textContent, '').trim() : '';
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+
+        if (tamilVoice) {
+            utterance.voice = tamilVoice;
+            utterance.lang = 'ta-IN'; 
+        }
+
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+
+        currentUtterance = utterance;
+
+        // பட்டன் நிலை புதுப்பிப்பு
+        button.textContent = "⏹️ நிறுத்து";
+        button.classList.add('active-reading');
+        button.onclick = function() { stopSpeech(button); }; // பேச்சை நிறுத்த அதன் சொந்த stopSpeech-ஐப் பயன்படுத்துக
+
+        utterance.onend = function() {
+            button.textContent = "🗣️ பேசு";
+            button.classList.remove('active-reading');
+            button.onclick = function() { speakSection(button); };
+            currentUtterance = null;
+        };
+
+        utterance.onerror = function(event) {
+            console.error(`Text-to-Speech பிழை: ${event.error}.`);
+            stopSpeech(button);
+        };
+
+        synth.speak(utterance);
+    }
+    
+    // 5. முழுப் பக்கத்தையும் வாசிக்க (Global Button)
+    function speakAll() {
+        if (readingAll) {
+            // வாசிப்பை நிறுத்த
+            stopSpeech();
+            return;
+        }
+
+        // வாசிப்பைத் தொடங்க
+        stopSpeech(); // தனிப்பட்ட வாசிப்பை நிறுத்த
+        readingAll = true;
+        globalTtsIcon.textContent = "⏸️"; // பட்டன் ஐகானை மாற்ற
+
+        currentSectionIndex = 0; // முதல் பிரிவில் இருந்து தொடங்கவும்
+        readNextSection();
+    }
+    
+    // 6. அடுத்த பிரிவைப் படிக்கும் செயல்பாட்டைத் தொடங்குதல்
+    function readNextSection() {
+        if (!readingAll || currentSectionIndex >= sections.length) {
+            // வாசிப்பு முடிந்தது அல்லது நிறுத்தப்பட்டது
+            stopSpeech();
+            return;
+        }
+
+        const currentSection = sections[currentSectionIndex];
+        const currentButton = currentSection.querySelector('.tts-button');
+
+        // பிரிவின் உரை (தலைப்பு மற்றும் பாராவை உள்ளடக்கியது)
+        const textToRead = currentSection.innerText.replace(currentButton.textContent, '').trim();
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+
+        if (tamilVoice) {
+            utterance.voice = tamilVoice;
+            utterance.lang = 'ta-IN'; 
+        }
+
+        utterance.rate = 0.9;
+        utterance.pitch = 1.0;
+        currentUtterance = utterance;
+
+        // வாசிக்கும் பிரிவை முன்னிலைப்படுத்த (Highlight)
+        resetAllSectionButtons();
+        currentButton.textContent = "🎧 வாசிக்கிறது..."; // தனிப்பட்ட பட்டன் நிலை
+        currentButton.classList.add('active-reading');
+
+        // பேச்சு முடிந்ததும் அடுத்த பிரிவுக்கு செல்ல
+        utterance.onend = function() {
+            currentButton.textContent = "🗣️ பேசு";
+            currentButton.classList.remove('active-reading');
+            currentSectionIndex++;
+            readNextSection(); // அடுத்த பிரிவுக்கு திரும்ப அழைக்கவும்
+        };
+
+        utterance.onerror = function(event) {
+            console.error(`Text-to-Speech பிழை: ${event.error}. அடுத்த பிரிவுக்கு செல்கிறது.`);
+            currentSectionIndex++;
+            readNextSection(); // பிழையால் அடுத்த பிரிவுக்கு செல்லவும்
+        };
+
+        synth.speak(utterance);
+    }
+
+    // மிதக்கும் பட்டனில் நிகழ்வைக் இணைக்கவும்
+    globalTtsButton.addEventListener('click', speakAll);
+
+  </script>
 
 
 
